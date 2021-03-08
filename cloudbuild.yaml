@@ -1,7 +1,10 @@
 steps:
-- name: "gcr.io/cloud-builders/gke-deploy"
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: Deploy
   args:
-  - run
-  - --filename=manifests/
-  - --location=us-east1-b
-  - --cluster=cymbalbank-test
+  - 'apply'
+  - '-f'
+  - 'manifests/'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cymbal-test'
