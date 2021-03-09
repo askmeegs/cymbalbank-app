@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pause-deploy-privileged
+  namespace: kube-system
+  labels:
+    app: pause
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pause
+  template:
+    metadata:
+      labels:
+        app: pause
+    spec:
+      serviceAccountName: default
+      containers:
+      - name: pause
+        image: k8s.gcr.io/pause
+        securityContext:
+          privileged: true
